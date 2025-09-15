@@ -1,0 +1,249 @@
+/* === Root Variables (consistent with the rest of the app) === */
+:root {
+    --primary-color: #3b82f6;
+    --primary-dark: #2563eb;
+    --danger-color: #ef4444; /* Red for destructive actions */
+    --danger-dark: #dc2626;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background-light: #f9fafb;
+    --border-color: #d1d5db;
+    --white: #ffffff;
+    --form-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === Main Section Layout === */
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 70px);
+    background-color: var(--background-light);
+    padding: 3rem 1rem;
+}
+
+/* === Profile Card Container === */
+.profile-container {
+    max-width: 600px;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--form-shadow);
+    overflow: hidden; /* Ensures border-radius is respected by children */
+}
+
+/* === Profile Header === */
+.profile-header {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), #60a5fa);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.profile-username {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.profile-email {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* === View Mode: Details === */
+.profile-details {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* === Edit Mode: Form === */
+.profile-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-form .input-group {
+    /* Styles are inherited from Register/Login.css if globally available */
+    /* Add them here if not for a self-contained component */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-form .input-group label {
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.profile-form .input-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-form .input-group input:disabled {
+    background-color: #f3f4f6; /* light gray */
+    cursor: not-allowed;
+}
+
+.profile-form .input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* === Action Buttons === */
+.profile-actions, .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-edit, .btn-save {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-edit:hover, .btn-save:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-delete, .btn-cancel {
+    background-color: transparent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-delete {
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+.btn-delete:hover {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.btn-cancel {
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+}
+.btn-cancel:hover {
+    background-color: var(--background-light);
+}
+.profile-header {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar-wrapper { /* This div holds the img and overlay */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    position: relative;
+    border: 4px solid var(--white); /* White border around the image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Crucial to clip the image within the circle */
+    background-image: url("https://i.pinimg.com/originals/42/1f/9d/421f9d0c3d545392fe9b939674fa7198.jpg");
+    background-size: cover;
+}
+
+.profile-avatar-img { /* The actual image tag */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the circle without distortion */
+    border-radius: 50%; /* Make the image itself round */
+    display: block; /* Remove any extra space below the image */
+}
+
+/* === NEW: Edit Overlay for Avatar === */
+.profile-avatar-wrapper.editable {
+    cursor: pointer;
+}
+
+.edit-avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.profile-avatar-wrapper.editable:hover .edit-avatar-overlay {
+    opacity: 1;
+}
+
+.edit-avatar-overlay i {
+    font-size: 1.5rem;
+}
+
+.edit-avatar-overlay span {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}

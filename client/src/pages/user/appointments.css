@@ -1,0 +1,175 @@
+/* General Variables & Styles from your theme are assumed to be available */
+
+.appointments-main {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    min-height: 100vh;
+}
+
+.appointments-container {
+    max-width: 896px; /* 56rem */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+}
+
+.appointments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* gray-200 */
+}
+
+/* Reusing your heading styles */
+.section-heading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Tabs for Upcoming/Past */
+.tabs-container {
+    display: flex;
+    border-bottom: 1px solid #d1d5db; /* gray-300 */
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--light-subtext);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Appointment Card */
+.appointments-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.appointment-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.appointment-card.past {
+    opacity: 0.7;
+    background-color: #f9fafb; /* gray-50 */
+}
+
+.card-main-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.card-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #eef2ff; /* indigo-100 */
+    color: var(--primary-color);
+    border-radius: 0.5rem;
+    width: 70px;
+    height: 70px;
+    font-weight: 700;
+}
+.card-date .month { font-size: 0.875rem; }
+.card-date .day { font-size: 1.875rem; line-height: 1; }
+
+.card-details h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem 0;
+}
+.card-details p {
+    margin: 0;
+    color: var(--light-subtext);
+}
+
+.card-actions {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f3f4f6; /* gray-100 */
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* Booking Form */
+.booking-form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+.form-label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+.form-select { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; }
+.form-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem;}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.75rem;
+}
+.time-slot-btn {
+    padding: 0.75rem;
+    border: 2px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: white;
+    text-align: center;
+    font-weight: 600;
+}
+.time-slot-btn.selected {
+    border-color: var(--primary-color);
+    background-color: #eef2ff; /* indigo-100 */
+    color: var(--primary-color);
+}
+
+.no-appointments { text-align: center; padding: 4rem 2rem; background-color: white; border-radius: 0.75rem; border: 2px dashed #d1d5db; }
+.no-appointments p { color: var(--light-subtext); margin-bottom: 1.5rem; }
+
+/* Re-using button styles from Journal.css */
+.btn { font-weight: 600; padding: 0.75rem 2rem; border-radius: 0.5rem; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
+.btn-primary { background-color: var(--primary-color); color: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+.btn-primary:hover { background-color: var(--primary-hover-color); }
+.btn-secondary { background-color: #e5e7eb; color: #374151; }
+.btn-secondary:hover { background-color: #d1d5db; }
+.btn-danger { background-color: #ef4444; color: white; }
+.btn-danger:hover { background-color: #dc2626; }
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .appointments-main { background-color: var(--dark-bg); color: var(--dark-text); }
+    .appointments-header, .tabs-container { border-color: #374151; }
+    .tab-btn { color: var(--dark-subtext); }
+    .tab-btn.active { color: #60a5fa; border-bottom-color: #60a5fa; }
+    .appointment-card, .booking-form-container, .no-appointments { background-color: #1f2937; border-color: #4b5563; }
+    .appointment-card.past { background-color: var(--dark-bg); }
+    .card-date { background-color: #312e81; color: #a5b4fc; }
+    .card-details p { color: var(--dark-subtext); }
+    .card-actions { border-color: #374151; }
+    .form-select, .time-slot-btn { background-color: var(--dark-bg); color: var(--dark-text); border-color: #4b5563; }
+    .time-slot-btn.selected { border-color: #60a5fa; background-color: #3730a3; color: #a5b4fc; }
+    .btn-secondary { background-color: #4b5563; color: var(--dark-text); }
+    .btn-secondary:hover { background-color: #374151; }
+}

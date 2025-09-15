@@ -1,0 +1,233 @@
+/* General Variables & Styles from your theme are assumed to be available */
+/* We'll use the same :root variables you defined. */
+
+.support-main {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+.support-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.support-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+/* Re-using your section heading styles */
+.section-heading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.section-subheading {
+    color: var(--light-subtext);
+    margin-bottom: 3rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hero section for the support page */
+.support-hero {
+    background-color: white;
+}
+
+.support-hero-content {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.support-heading {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.support-highlight {
+    color: var(--primary-color);
+}
+
+.support-subheading {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: var(--light-subtext);
+}
+
+
+/* Grid for displaying support options (reusing features-grid logic) */
+.support-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: left;
+}
+
+/* Card for individual support services (reusing feature-card logic) */
+.support-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.support-card-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.support-card-description {
+    color: var(--light-subtext);
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Makes description take available space */
+}
+
+/* Specific styles for immediate help cards */
+.helpline-card {
+    border: 2px solid #ef4444; /* red-500 */
+}
+
+.helpline-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--light-text);
+}
+
+.helpline-number a {
+    color: inherit;
+    text-decoration: none;
+}
+.helpline-number a:hover {
+    color: var(--primary-color);
+}
+
+
+/* FAQ Section */
+.faq-section {
+    background-color: white;
+}
+
+.faq-container {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e5e7eb; /* gray-200 */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+    color: var(--light-subtext);
+}
+
+/* Re-using your button styles */
+.btn {
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+    display: inline-block;
+    width: fit-content;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+
+/* Responsive Styles (Medium screens and up) */
+@media (min-width: 768px) {
+    .support-section {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .support-heading {
+        font-size: 3.75rem; /* 6xl */
+    }
+
+    .support-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .support-grid.campus-services {
+         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    .support-main, .support-hero, .faq-section {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+
+    .section-subheading, .support-subheading, .support-card-description, .faq-answer {
+        color: var(--dark-subtext);
+    }
+
+    .support-highlight {
+        color: #60a5fa; /* blue-400 */
+    }
+
+    .support-card {
+        background-color: #1f2937; /* gray-800 */
+    }
+
+    .helpline-card {
+        border-color: #f87171; /* red-400 */
+    }
+    
+    .helpline-number {
+        color: var(--dark-text);
+    }
+
+    .helpline-number a:hover {
+        color: #60a5fa;
+    }
+
+    .faq-item {
+        border-color: #374151; /* gray-700 */
+    }
+}

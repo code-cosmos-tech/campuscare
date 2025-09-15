@@ -4,11 +4,12 @@ const app = express();
 const connectDb = require("./utilities/db");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+// const chatRouter = require("./routes/chat")
 const errorFunction = require("./middlewares/error-func");
 const cors = require("cors");
 
 const corsOption = {
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     methods: "GET, POST, PATCH, DELETE, PUT, HEAD",
     credentials: true,
 }
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use(cors(corsOption));
 
 app.use("/api", authRouter);
-app.use("api/user", userRouter);
+app.use("/api/user", userRouter);
+// app.use("/api/chat", chatRouter);
 app.use(errorFunction);
 
 connectDb().then(() => {

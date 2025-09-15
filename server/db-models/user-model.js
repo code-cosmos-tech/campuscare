@@ -25,6 +25,10 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         default: false,
+    },
+    profilePic : {
+        type : Buffer,
+        require : false,
     }
 }, {timestamps: true});
 

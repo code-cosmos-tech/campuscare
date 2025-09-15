@@ -1,0 +1,213 @@
+/* General Variables & Styles from your theme are assumed to be available */
+
+.community-main {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+.community-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.community-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+/* Re-using your section heading styles */
+.section-heading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.section-subheading {
+    color: var(--light-subtext);
+    margin-bottom: 3rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Hero section for the community page */
+.community-hero {
+    background-color: white;
+}
+
+.community-heading {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.community-highlight {
+    color: var(--primary-color);
+}
+
+/* Grid for forum categories (reusing features-grid logic) */
+.forum-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Card for forum categories (reusing feature-card logic) */
+.forum-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.forum-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.forum-card-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.forum-card-description {
+    color: var(--light-subtext);
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+/* Events Section */
+.events-section {
+    background-color: white;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: left;
+}
+
+.event-card {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.event-date {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.event-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* Guidelines Section */
+.guidelines-box {
+    max-width: 48rem;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #e5e7eb; /* gray-200 */
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: left;
+}
+
+.guidelines-box ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.guidelines-box li {
+    margin-bottom: 0.75rem;
+    color: var(--light-subtext);
+}
+
+/* Re-using button styles */
+.btn {
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+    display: inline-block;
+    width: fit-content;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .community-section {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+    .community-heading {
+        font-size: 3.75rem;
+    }
+    .forum-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .forum-grid {
+         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    .community-main, .community-hero, .events-section {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+    .section-subheading, .forum-card-description, .guidelines-box li {
+        color: var(--dark-subtext);
+    }
+    .community-highlight, .event-date {
+        color: #60a5fa; /* blue-400 */
+    }
+    .forum-card, .guidelines-box {
+        background-color: #1f2937; /* gray-800 */
+    }
+    .event-card {
+        background-color: var(--dark-bg);
+        border-left-color: #60a5fa;
+    }
+     .guidelines-box {
+        border-color: #374151; /* gray-700 */
+    }
+}

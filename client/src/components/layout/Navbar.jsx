@@ -16,6 +16,10 @@ export function Navbar() {
         setShow(!show);
     }
  
+    if(!userData){
+        localStorage.removeItem("accessToken")
+    }
+
     return <section className="navbar-container">
         <div className="nav-container">
             <span className="logo">
@@ -27,9 +31,9 @@ export function Navbar() {
             <div className="links">
                 <span><NavLink className="nav-link" to={'/'}>Home</NavLink></span>
                 <span><NavLink className="nav-link" to={'/resources'}>Resources</NavLink></span>
-                <span><NavLink className="nav-link" to={'/support'}>Support</NavLink></span>
+                {/* <span><NavLink className="nav-link" to={'/support'}>Support</NavLink></span> */}
                 <span><NavLink className="nav-link" to={'/community'}>Community</NavLink></span>
-                <span><NavLink className="nav-link" to={'/professionals'}>Professionals</NavLink></span>
+                {/* <span><NavLink className="nav-link" to={'/professionals'}>Professionals</NavLink></span> */}
                 {
                     !isLoggedIn ?
                     <>
@@ -39,7 +43,7 @@ export function Navbar() {
                     <>
                         <span><NavLink to={'/user/profile'} className="nav-link"><i className="fa-regular fa-user"></i> Profile</NavLink></span>
                         <span><NavLink to={'/user/appointments'} className="nav-link"><i className="fa-regular fa-calendar-check"></i> Appointments</NavLink></span>
-                        <span><NavLink to={'/user/journal'} className="nav-link"><i className="fa-regular fa-book"></i> Journal</NavLink></span>
+                        {/* <span><NavLink to={'/user/journal'} className="nav-link"><i className="fa-regular fa-book"></i> Journal</NavLink></span> */}
                         <span><NavLink to={'/'} onClick={logout} className="nav-link logout-btn">Logout</NavLink></span>
                     </>
                 }

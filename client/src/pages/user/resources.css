@@ -1,0 +1,200 @@
+/* General Variables & Styles from your theme are assumed to be available */
+
+.resources-main {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+.resources-container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.resources-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Re-using your section heading styles */
+.section-heading {
+    text-align: center;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.section-subheading {
+    text-align: center;
+    color: var(--light-subtext);
+    margin-bottom: 3rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Filter Buttons */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    background-color: white;
+    color: var(--light-subtext);
+    border: 1px solid #d1d5db; /* gray-300 */
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px; /* pill shape */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #f3f4f6; /* gray-100 */
+    border-color: #9ca3af; /* gray-400 */
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+
+/* Resource Grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Card for individual resources */
+.resource-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.resource-category {
+    display: inline-block;
+    background-color: #dbeafe; /* blue-200 */
+    color: #1e40af; /* blue-800 */
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+}
+
+.resource-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+.resource-description {
+     color: var(--light-subtext);
+     margin-bottom: 1.5rem;
+}
+
+
+/* Re-using button styles */
+.btn {
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .resources-section {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+     .resources-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .resources-grid {
+         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    .resources-main {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+    .section-subheading, .resource-description {
+        color: var(--dark-subtext);
+    }
+    .filter-btn {
+        background-color: #1f2937; /* gray-800 */
+        color: var(--dark-subtext);
+        border-color: #4b5563; /* gray-600 */
+    }
+    .filter-btn:hover {
+        background-color: #374151; /* gray-700 */
+        border-color: #6b7280; /* gray-500 */
+    }
+    .filter-btn.active {
+        background-color: #60a5fa; /* blue-400 */
+        color: var(--dark-bg);
+        border-color: #60a5fa;
+    }
+    .resource-card {
+        background-color: #1f2937; /* gray-800 */
+    }
+    .resource-category {
+        background-color: #1e3a8a; /* blue-900 */
+        color: #bfdbfe; /* blue-200 */
+    }
+    .btn-secondary {
+        color: #60a5fa;
+        border-color: #60a5fa;
+    }
+    .btn-secondary:hover {
+        background-color: #60a5fa;
+        color: var(--dark-bg);
+    }
+}

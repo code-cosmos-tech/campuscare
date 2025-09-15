@@ -57,7 +57,7 @@ export function Home() {
                         
                         <div className="hero-image-container">
                              <motion.img 
-                                src="/mental-health-hero.svg" 
+                                src="https://static.vecteezy.com/system/resources/previews/002/427/906/large_2x/mental-health-logo-icon-design-vector.jpg" 
                                 alt="Mental wellness illustration"
                                 className="hero-image"
                                 initial={{ opacity: 0, scale: 0.9 }}

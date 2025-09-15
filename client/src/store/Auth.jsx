@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => { // Added children prop
                 setUserData(data);
                 setIsAdmin(data.isAdmin || false);
             }
+            return data
         } catch (error) {
             console.error("Authentication failed:", error);
         }
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => { // Added children prop
 
     useEffect(() => {
         AuthenticateUser();
-    }, [token]);
+    }, []);
 
     const setUserToken = (token) => {
         setToken(token);
@@ -58,11 +59,13 @@ export const AuthProvider = ({ children }) => { // Added children prop
         logout,
         setUserToken,
         userData,
+        AuthenticateUser,
+        setUserData,
         tokenBearer,
         isLoggedIn,
         URL,
         isAdmin,
-        token
+        token,
     };
 
     return (

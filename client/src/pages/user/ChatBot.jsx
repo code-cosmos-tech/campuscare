@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './ChatBot.css'; // The stylesheet will be updated
 import { data } from 'react-router';
+import { Navbar } from '../../components/layout/Navbar';
 
 export function ChatBot() {
     const [messages, setMessages] = useState([
@@ -11,6 +12,7 @@ export function ChatBot() {
         }
     ]);
     const [input, setInput] = useState('');
+    const [isLoading, setIsloading] = useState(false);
     const chatContentRef = useRef(null);
 
     // useEffect to scroll down whenever messages change
@@ -31,12 +33,15 @@ export function ChatBot() {
         // Add user's message
         const userMessage = { id: Date.now(), text: input, sender: 'user' };
         setMessages(prev => [...prev, userMessage]);
-        setInput('');
 
         const requestBody = {
-            "user-input": "I just cut myself… I need help immediately"
+            "user-input": input
         }
+            console.log(requestBody);
+            console.log(input);
+        setInput('');
 
+        setIsloading(true)
         const res = await fetch(`https://codeandcosmos.app.n8n.cloud/webhook/13c2e677-4967-45fe-adcb-c2cb9b16c5ee`, {
             method : "POST",
             headers : {
@@ -53,12 +58,19 @@ export function ChatBot() {
                 text: data,
                 sender: 'bot'
             };
+            console.log(requestBody);
+            console.log(input);
+            console.log(data);
+            console.log(botResponse);
+            
             setMessages(prev => [...prev, botResponse]);
         }
+        setIsloading(false)
     };
 
     return (
         <main className="chatbot-page">
+            <Navbar/>
             <div className="chat-content" ref={chatContentRef}>
                 <div className="messages-list">
                     {messages.map((message) => (
@@ -75,6 +87,11 @@ export function ChatBot() {
             </div>
 
             <form className="chat-input-form" onSubmit={handleSendMessage}>
+                {
+                isLoading ? 
+                    <img className='loader' src="https://cdn.dribbble.com/users/2973561/screenshots/5757826/media/221d6bfc1960ab98a7585fcc2a4d0181.gif" alt="" srcset="" />
+                    : <></>
+                }
                 <div className="input-container">
                     <input
                         type="text"

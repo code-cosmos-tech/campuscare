@@ -1,0 +1,165 @@
+/* General Variables & Styles from your theme are assumed to be available */
+
+.journal-main {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    min-height: 100vh;
+}
+
+.journal-container {
+    max-width: 896px; /* 56rem */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem;
+}
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* gray-200 */
+}
+
+/* Reusing your heading styles */
+.section-heading {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0; /* Adjusted for header */
+}
+
+/* Journal Entry Card */
+.entry-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.entry-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+}
+
+.entry-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6; /* gray-100 */
+    margin-bottom: 1rem;
+}
+
+.entry-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.entry-date {
+    color: var(--light-subtext);
+    font-size: 0.875rem;
+}
+
+.entry-content {
+    color: #374151; /* gray-700 */
+    line-height: 1.6;
+    white-space: pre-wrap; /* Preserves line breaks */
+}
+
+.entry-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.entry-actions .btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+
+/* Journal Form */
+.journal-form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px #bfdbfe; /* blue-200 */
+}
+
+.form-textarea {
+    min-height: 250px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.no-entries {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 2px dashed #d1d5db; /* gray-300 */
+}
+
+.no-entries p {
+    color: var(--light-subtext);
+    margin-bottom: 1.5rem;
+}
+
+/* Re-using button styles */
+.btn { font-weight: 600; padding: 0.75rem 2rem; border-radius: 0.5rem; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
+.btn-primary { background-color: var(--primary-color); color: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+.btn-primary:hover { background-color: var(--primary-hover-color); }
+.btn-secondary { background-color: #e5e7eb; color: #374151; }
+.btn-secondary:hover { background-color: #d1d5db; }
+.btn-danger { background-color: #ef4444; color: white; }
+.btn-danger:hover { background-color: #dc2626; }
+
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .journal-main { background-color: var(--dark-bg); color: var(--dark-text); }
+    .journal-header { border-color: #374151; }
+    .entry-card, .journal-form-container, .no-entries { background-color: #1f2937; border-color: #4b5563; }
+    .entry-card-header { border-color: #374151; }
+    .entry-date { color: var(--dark-subtext); }
+    .entry-content { color: var(--dark-text); }
+    .form-label { color: var(--dark-text); }
+    .form-input, .form-textarea { background-color: var(--dark-bg); border-color: #4b5563; color: var(--dark-text); }
+    .form-input:focus, .form-textarea:focus { border-color: #60a5fa; box-shadow: 0 0 0 3px #1e3a8a; }
+    .btn-secondary { background-color: #4b5563; color: var(--dark-text); }
+    .btn-secondary:hover { background-color: #374151; }
+}

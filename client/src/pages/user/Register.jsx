@@ -24,13 +24,6 @@ export function Register() {
     };
 
     const handleSubmit = async (e) => {
-        
-        console.log(user);
-
-        setTimeout(() => {
-            
-        }, 2000);
-        e.preventDefault();
         try {
             const res = await fetch(`${URL}/api/register`, {
                 method: "POST",
