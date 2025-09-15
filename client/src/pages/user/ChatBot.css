@@ -1,0 +1,137 @@
+/* === Root Variables (Keeping the established theme) === */
+:root {
+    --primary-color: #3b82f6;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background-light: #f9fafb; /* Slightly off-white page background */
+    --background-widget: #ffffff; /* For cards, inputs, etc. */
+    --border-color: #d1d5db;
+    --white: #ffffff;
+    --form-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === Main Page Layout === */
+.chatbot-page {
+    /* width: 100vw; */
+    height: calc(100vh - 70px); /* Full height minus navbar */
+    background-color: var(--background-light);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 2rem 1rem 0; /* Add top padding */
+}
+
+/* === Messages List & Wrapper === */
+.messages-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 120px; /* Space for the floating input bar */
+}
+
+.message-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/* === Avatar Styles === */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+}
+
+.bot .avatar {
+    background: linear-gradient(135deg, var(--primary-color), #60a5fa);
+    color: var(--white);
+}
+
+.user .avatar {
+    background-color: #e5e7eb; /* light gray */
+    color: var(--text-light);
+}
+
+/* === Message Text === */
+.message-text p {
+    margin: 0;
+    padding-top: 0.5rem; /* Align text with middle of avatar */
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* === Floating Input Form === */
+.chat-input-form {
+    padding: 1rem;
+    width: 100%;
+    background: linear-gradient(to top, var(--background-light) 70%, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.input-container {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background-color: var(--background-widget);
+    padding: 0.5rem 0.75rem 0.5rem 1.5rem;
+    border-radius: 999px; /* Pill shape */
+    box-shadow: var(--form-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.input-container input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text-dark);
+}
+
+.input-container button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chat-content {
+        padding: 1rem 1rem 0;
+    }
+    .messages-list {
+        padding-bottom: 100px;
+    }
+    .chat-input-form {
+        padding: 0.75rem;
+    }
+}
