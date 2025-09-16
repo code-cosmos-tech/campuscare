@@ -29,7 +29,7 @@ function App() {
         <Route path="/resources" element={<Resources/>}/>
         <Route path="/user/allAppointments" element={<AllAppointmentsPage/>}/>
         <Route path="/user/appointments" element={<AppointmentsPage/>}/>
-        <Route path="/counseling-appointment" element={<BookingForm/>}/>
+        <Route path="/book-appointment" element={<BookingForm/>}/>
       </Routes>
       <ToastContainer
         position="bottom-right"

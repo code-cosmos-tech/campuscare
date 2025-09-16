@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 const connectDb = require("./utilities/db");
 const authRouter = require("./routes/auth");
+const appointRouter = require("./routes/appointment");
 // const appointmentRouter = require("./routes/appointment");
 const userRouter = require("./routes/user");
-// const chatRouter = require("./routes/chat")
+const chatRouter = require("./routes/chat")
 const errorFunction = require("./middlewares/error-func");
 const cors = require("cors");
 
@@ -22,7 +23,9 @@ app.use(cors(corsOption));
 
 app.use("/api", authRouter);
 app.use("/api/user", userRouter);
-// app.use("/api/chat", chatRouter);
+app.use("/api/appointment", appointRouter);
+app.use("/api/chat", chatRouter);
+
 app.use(errorFunction);
 
 connectDb().then(() => {

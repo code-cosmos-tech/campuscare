@@ -30,7 +30,6 @@ export function Profile() {
 
     const handleCancelEdit = () => {
         setIsEditMode(false);
-        // Reset form data to original state
         if (userData) {
             setFormData({
                 username: userData.username,
@@ -47,16 +46,16 @@ export function Profile() {
             const response = await fetch(`${URL}/api/user/update`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json', // Set content type to JSON
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(formData), // Send formData as a JSON string
+                body: JSON.stringify(formData), 
             });
             const responseData = await response.json();
 
             if (response.ok) {
                 toast.success('Profile updated successfully!');
-                setIsEditMode(false);getUpdatedUser();
+                setIsEditMode(false);
             } else {
                 toast.error(responseData.msg || 'Failed to update profile.');
             }

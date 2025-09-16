@@ -1,5 +1,6 @@
 const User = require("../db-models/user-model");
 
+
 const getUser = async (req, res, next) => {
     try {
         const userData = req.userData;

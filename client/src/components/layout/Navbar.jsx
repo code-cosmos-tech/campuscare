@@ -1,11 +1,9 @@
-import { NavLink } from "react-router-dom"; // Corrected import
+import { NavLink } from "react-router-dom"; 
 import { useAuth } from "../../store/Auth";
 import { useState } from "react";
-import "./Navbar.css"; // Make sure to import the stylesheet
+import "./Navbar.css"; 
 
 export function Navbar() {
-    // ... your existing component code ...
-    // (The JSX and logic you provided are perfect)
     const [show, setShow] = useState(false);
     const [hasInteracted, setHasInteracted] = useState(false);
     const { isLoggedIn, logout, userData, isAdmin} = useAuth();
@@ -24,7 +22,7 @@ export function Navbar() {
         <div className="nav-container">
             <span className="logo">
                 <NavLink className="nav-link" to={'/'}>
-                    <i className="fa-solid fa-heart-circle-check"></i> MindBridge
+                    <i className="fa-solid fa-heart-circle-check"></i> CampusCare
                 </NavLink>
             </span>
             
@@ -33,7 +31,6 @@ export function Navbar() {
                 <span><NavLink className="nav-link" to={'/resources'}>Resources</NavLink></span>
                 <span><NavLink className="nav-link" to={'/support'}>Support</NavLink></span>
                 <span><NavLink className="nav-link" to={'/community'}>Community</NavLink></span>
-                {/* <span><NavLink className="nav-link" to={'/professionals'}>Professionals</NavLink></span> */}
                 {
                     !isLoggedIn ?
                     <>

@@ -50,14 +50,14 @@ export function Home() {
                                     className="btn btn-secondary"
                                     onClick={() => navigate('/chatbot')}
                                 >
-                                    Get Immediate Support
+                                    Chat with Aizen
                                 </button>
                             </motion.div>
                         </motion.div>
                         
                         <div className="hero-image-container">
                              <motion.img 
-                                src="https://static.vecteezy.com/system/resources/previews/002/427/906/large_2x/mental-health-logo-icon-design-vector.jpg" 
+                                src="2211.q702.034.S.m005.c12.mental health.jpg" 
                                 alt="Mental wellness illustration"
                                 className="hero-image"
                                 initial={{ opacity: 0, scale: 0.9 }}

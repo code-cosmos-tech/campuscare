@@ -1,78 +1,61 @@
 import { useState, useEffect } from 'react';
-// useNavigate is no longer needed
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../../components/layout/Navbar';
 import './Appointments.css';
 import { useAuth } from '../../store/Auth';
 
 export function AppointmentsPage() {
-    const {userData, tokenBearer, isLoggedIn, URL} = useAuth();
+    const { tokenBearer, URL, userData } = useAuth();
+    const navigate = useNavigate();
     const [appointments, setAppointments] = useState([]);
     const [activeTab, setActiveTab] = useState('Upcoming');
 
-    const fetchAppointments = async ()=>{
-        const resp = await fetch(`${URL}/api/appointment`, {
-            method : "GET",
-            headers : {
-                "Content-Type" : "Application/json",
-                "Authorization" : tokenBearer,
-            }
-        });
-
-        if(resp.ok){
-            const data = await resp.json();
-            setAppointments(data)
+    const fetchAppointments = async () => {
+        if (!userData) {
+            return;
         }
-    }
-    // const mockAppointments = [
-    //     {
-    //         id: 1,
-    //         service: 'Deep Tissue Massage',
-    //         professional: 'Dr. Evelyn Reed',
-    //         date: '2025-08-20', // Past
-    //         time: '10:00 AM',
-    //     },
-    //     {
-    //         id: 2,
-    //         service: 'Annual Physical Exam',
-    //         professional: 'Dr. Ben Carter',
-    //         date: '2025-09-10', // Past
-    //         time: '2:30 PM',
-    //     },
-    //     {
-    //         id: 3,
-    //         service: 'Dental Cleaning',
-    //         professional: 'Dr. Chloe Davis',
-    //         date: '2025-09-25', // Upcoming
-    //         time: '11:00 AM',
-    //     },
-    //     {
-    //         id: 4,
-    //         service: 'Chiropractic Adjustment',
-    //         professional: 'Dr. Marcus Thorne',
-    //         date: '2025-10-05', // Upcoming
-    //         time: '4:00 PM',
-    //     },
-    //     {
-    //         id: 5,
-    //         service: 'Follow-up Consultation',
-    //         professional: 'Dr. Ben Carter',
-    //         date: '2025-10-15', // Upcoming
-    //         time: '9:15 AM',
-    //     },
-    // ];
+
+        try {
+            const resp = await fetch(`${URL}/api/appointment/${userData._id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": tokenBearer,
+                }
+            });
+
+            if (resp.ok) {
+                const responseData = await resp.json(); 
+                const appointmentsArray = responseData.data; 
+
+                if (Array.isArray(appointmentsArray)) {
+                    const sortedData = appointmentsArray.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    setAppointments(sortedData);
+                } else {
+                    console.error("API did not return an array inside the 'data' property.");
+                    setAppointments([]);
+                }
+            }
+        } catch (error) {
+            console.error("Failed to fetch appointments:", error);
+        }
+    };
 
     useEffect(() => {
-        appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
-        setAppointments(appointments);
-        
-    }, []);
+        fetchAppointments();
+    }, [userData]);
+
+    // ... The rest of your component remains the same
+    const handleRedirectToBooking = () => {
+        navigate('/book-appointment');
+    };
+
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
+    today.setHours(0, 0, 0, 0);
 
     const upcomingAppointments = appointments.filter(appt => new Date(appt.date) >= today);
     const pastAppointments = appointments.filter(appt => new Date(appt.date) < today);
-    
     const displayedAppointments = activeTab === 'Upcoming' ? upcomingAppointments : pastAppointments;
 
     const formatDate = (dateString) => {
@@ -85,12 +68,16 @@ export function AppointmentsPage() {
     };
 
     return (
+        // ... Your JSX remains the same
         <>
             <Navbar />
             <main className="appointments-main">
                 <div className="appointments-container">
                     <div className="appointments-header">
                         <h1 className="section-heading">My Appointments</h1>
+                        <button className="btn btn-primary" onClick={handleRedirectToBooking}>
+                            Book an Appointment
+                        </button>
                     </div>
 
                     <div className="tabs-container">
@@ -98,41 +85,49 @@ export function AppointmentsPage() {
                         <button className={`tab-btn ${activeTab === 'Past' ? 'active' : ''}`} onClick={() => setActiveTab('Past')}>Past</button>
                     </div>
 
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                         {displayedAppointments.length > 0 ? (
-                            <motion.div className="appointments-list">
+                            <motion.div
+                                key={activeTab}
+                                className="appointments-list"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                            >
                                 {displayedAppointments.map(appt => {
                                     const { month, day, full } = formatDate(appt.date);
                                     return (
-                                    <motion.div
-                                        key={appt.id}
-                                        layout
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, x: -50, transition: { duration: 0.3 } }}
-                                        className={`appointment-card ${activeTab === 'Past' ? 'past' : ''}`}
-                                    >
-                                        <div className="card-main-info">
-                                            <div className="card-date">
-                                                <span className="month">{month}</span>
-                                                <span className="day">{day}</span>
+                                        <motion.div
+                                            key={appt._id}
+                                            layout
+                                            className={`appointment-card ${activeTab === 'Past' ? 'past' : ''}`}
+                                        >
+                                            <div className="card-main-info">
+                                                <div className="card-date">
+                                                    <span className="month">{month}</span>
+                                                    <span className="day">{day}</span>
+                                                </div>
+                                                <div className="card-details">
+                                                    <h3>{appt.department}</h3>
+                                                    <p>With {appt.doctorId?.name || 'Dr. Info Unavailable'}</p>
+                                                    <p>{full} at {appt.startTime}</p>
+                                                </div>
                                             </div>
-                                            <div className="card-details">
-                                                <h3>{appt.service}</h3>
-                                                <p>With {appt.professional}</p>
-                                                <p>{full} at {appt.time}</p>
-                                            </div>
-                                        </div>
-                                        {/* The "Cancel" button and its container div have been removed */}
-                                    </motion.div>
-                                )})}
+                                        </motion.div>
+                                    )
+                                })}
                             </motion.div>
                         ) : (
-                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="no-appointments">
-                                 <h2 className="section-heading">No {activeTab} Appointments</h2>
-                                 <p>There are no appointments to display in this category.</p>
-                                 {/* The "Book a New Appointment" button has been removed */}
-                             </motion.div>
+                           <motion.div
+                                key="no-appointments"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="no-appointments"
+                            >
+                                <h2 className="section-heading">No {activeTab} Appointments</h2>
+                                <p>There are no appointments to display in this category.</p>
+                            </motion.div>
                         )}
                     </AnimatePresence>
                 </div>

@@ -7,12 +7,13 @@ import "./Resources.css";
 
 // Sample data for resources
 const allResources = [
-    { id: 1, category: 'Article', title: 'Understanding Anxiety and Panic Attacks', description: 'A comprehensive guide to identifying triggers and symptoms.', link: '/resources/anxiety-guide' },
-    { id: 2, category: 'Tool', title: 'Guided 5-Minute Meditation', description: 'A short audio session to help you find calm and refocus your mind.', link: '/resources/meditation-5min' },
-    { id: 3, category: 'Video', title: 'The Science of Stress Management', description: 'An engaging TED-Ed video explaining how to handle daily stressors effectively.', link: '/resources/stress-video' },
-    { id: 4, category: 'Article', title: 'How to Build Healthier Habits', description: 'Practical steps for creating positive routines that stick.', link: '/resources/healthy-habits' },
-    { id: 5, category: 'Tool', title: 'Digital Journaling Prompts', description: 'Thought-provoking questions to guide your self-reflection.', link: '/resources/journal-prompts' },
-    { id: 6, category: 'Campus', title: 'Upcoming Wellness Workshops', description: 'Check the schedule for free workshops on mindfulness, nutrition, and more.', link: '/events' },
+    { id: 1, category: 'Article', title: 'Understanding Anxiety and Panic Attacks', description: 'A comprehensive guide to identifying triggers and symptoms.', link: 'https://www.nimh.nih.gov/get-involved/digital-shareables/shareable-resources-on-anxiety-disorders?utm_campaign=shareNIMH&utm_medium=Portal&utm_source=NIMHwebsite' },
+    { id: 2, category: 'Tool', title: 'Guided 5-Minute Meditation', description: 'A short audio session to help you find calm and refocus your mind.', link: "https://www.nccih.nih.gov/health/meditation-and-mindfulness-effectiveness-and-safety" },
+    { id: 3, category: 'Video', title: 'The Science of Stress Management', description: 'An engaging TED-Ed video explaining how to handle daily stressors effectively.', link: "https://www.nccih.nih.gov/health/providers/digest/mind-and-body-approaches-for-stress" },
+    { id: 4, category: 'Article', title: 'How to Build Healthier Habits', description: 'Practical steps for creating positive routines that stick.', link: "https://newsinhealth.nih.gov/2018/03/creating-healthy-habits" },
+    { id: 5, "category": "Tool", "title": "Digital Journaling Prompts", "description": "Thought-provoking questions to guide your self-reflection.", "link": "/resources/journal-prompts"},
+    { id: 6, "category": "Campus", "title": "Upcoming Wellness Workshops", "description": "Check the schedule for free workshops on mindfulness, nutrition, and more.", "link": "/events"}
+
 ];
 
 export function Resources() {
@@ -67,9 +68,13 @@ export function Resources() {
                                         <span className="resource-category">{resource.category}</span>
                                         <h3 className="resource-title">{resource.title}</h3>
                                         <p className="resource-description">{resource.description}</p>
-                                        <button className="btn btn-secondary" onClick={() => {/* navigate(resource.link) */}}>
-                                            Learn More
-                                        </button>
+                                        
+                                        <a href={resource.link} className="resource-link" target="_blank" rel="noopener noreferrer">
+                                            <button className="btn btn-secondary" >
+                                                Learn More
+                                            </button>
+                                        </a>
+                                        
                                     </div>
                                 </motion.div>
                             ))}

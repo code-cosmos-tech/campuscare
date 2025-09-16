@@ -4,13 +4,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ChatBot.css'; // The stylesheet will be updated
 import { useNavigate } from 'react-router';
+import { Navbar } from '../../components/layout/Navbar';
 
 export function ChatBot() {
-    const {URL, userData, isLoggedIn} = useAuth();
+    const { URL, userData, isLoggedIn } = useAuth();
     const [messages, setMessages] = useState([
         {
             id: 1,
-            text: "Hello! I'm Zen, your personal wellness assistant. How can I help you get started on a path to well-being today?",
+            text: "Hello! I'm Aizen, your personal wellness assistant. How can I help you get started on a path to well-being today?",
             sender: 'bot'
         }
     ]);
@@ -19,9 +20,9 @@ export function ChatBot() {
     const [pendingHelpMessage, setPendingHelpMessage] = useState('');
     const chatContentRef = useRef(null);
     const navigate = useNavigate();
-    
-    useEffect(()=>{
-        if(!isLoggedIn){
+
+    useEffect(() => {
+        if (!isLoggedIn) {
             return navigate("/login");
         }
     })
@@ -75,30 +76,18 @@ export function ChatBot() {
         e.preventDefault();
         if (input.trim() === '') return;
 
-        // Add user's message
         const userMessage = { id: Date.now(), text: input, sender: 'user' };
         setMessages(prev => [...prev, userMessage]);
 
         if (checkHighRisk(input)) {
             setPendingHelpMessage(input);
-            toast.error(
-                <div>
-                    ⚠️ We detected high-risk language. Do you want us to notify support to help you?
-                    <div style={{ marginTop: '10px' }}>
-                        <button onClick={handleConsentYes} style={{ marginRight: '10px' }}>Yes</button>
-                        <button onClick={handleConsentNo}>No</button>
-                    </div>
-                </div>, {
-                    autoClose: false,
-                    closeOnClick: false
-                }
-            );
-        } else {
-            sendToBackend(input);
+            sendHelpEmail(input);
         }
+        sendToBackend(input);
 
         setInput('');
     };
+
 
     const sendToBackend = async () => {
         const requestBody = {
@@ -141,12 +130,13 @@ export function ChatBot() {
                 body: JSON.stringify({
                     useremail: userData.email,
                     phone: userData.phone,
-                    text: input
+                    text: message
                 })
             });
+
             const confirmation = {
                 id: Date.now(),
-                text: "Support has been notified. Help is on the way.",
+                text: "⚠️ We've detected a situation that requires support and have automatically notified our team to assist you. You’re not alone.",
                 sender: 'bot'
             };
             setMessages(prev => [...prev, confirmation]);
@@ -154,12 +144,13 @@ export function ChatBot() {
             console.error("Failed to send email:", error);
             const errorMsg = {
                 id: Date.now(),
-                text: "Failed to notify support. Please try again later.",
+                text: "⚠️ We encountered an issue notifying support. Please try again later.",
                 sender: 'bot'
             };
             setMessages(prev => [...prev, errorMsg]);
         }
     };
+
 
     const handleConsentYes = () => {
         toast.dismiss();
@@ -177,41 +168,43 @@ export function ChatBot() {
     };
 
     return (
-        <main className="chatbot-page">
-            <div className="chat-content" ref={chatContentRef}>
-                <div className="messages-list">
-                    {messages.map((message) => (
-                        <div key={message.id} className={`message-wrapper ${message.sender}`}>
-                            <div className="avatar">
-                                <i className={`fa-solid ${message.sender === 'bot' ? 'fa-robot' : 'fa-user'}`}></i>
+        <>
+            <Navbar />
+            <main className="chatbot-page">
+                <div className="chat-content" ref={chatContentRef}>
+                    <div className="messages-list">
+                        {messages.map((message) => (
+                            <div key={message.id} className={`message-wrapper ${message.sender}`}>
+                                <div className="avatar">
+                                    <i className={`fa-solid ${message.sender === 'bot' ? 'fa-robot' : 'fa-user'}`}></i>
+                                </div>
+                                <div className="message-text">
+                                    <p>{message.text}</p>
+                                </div>
                             </div>
-                            <div className="message-text">
-                                <p>{message.text}</p>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <form className="chat-input-form" onSubmit={handleSendMessage}>{
-                isLoading ? 
-                    <img className='loader' src="https://cdn.dribbble.com/users/2973561/screenshots/5757826/media/221d6bfc1960ab98a7585fcc2a4d0181.gif" />
-                    : <></>
+                <form className="chat-input-form" onSubmit={handleSendMessage}>{
+                    isLoading ?
+                        <img className='loader' src="https://cdn.dribbble.com/users/2973561/screenshots/5757826/media/221d6bfc1960ab98a7585fcc2a4d0181.gif" />
+                        : <></>
                 }
-                <div className="input-container">
-                    <input
-                        type="text"
-                        value={input}
-                        onChange={handleInputChange}
-                        placeholder="Ask MindBot anything..."
-                        autoComplete="off"
-                    />
-                    <button type="submit" aria-label="Send message">
-                        <i className="fa-solid fa-arrow-up"></i>
-                    </button>
-                </div>
-            </form>
-            
-        </main>
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            value={input}
+                            onChange={handleInputChange}
+                            placeholder="Ask MindBot anything..."
+                            autoComplete="off"
+                        />
+                        <button type="submit" aria-label="Send message">
+                            <i className="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                </form>
+            </main>
+        </>
     );
 }

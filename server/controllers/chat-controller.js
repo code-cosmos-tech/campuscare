@@ -4,12 +4,12 @@ const nodemailer = require("nodemailer");
 const mail = async (req, res, next) => {
     const { useremail, phone, text } = req.body;
     try {
-        // Find all admin users
         const admins = await User.find({ isAdmin: true });
+        console.log(admins);
+        
 
         if (admins && admins.length > 0) {
-            // Extract email addresses from the admin users
-            const adminEmails = admins.map(admin => admin.email).join(','); // comma-separated list
+            const adminEmails = admins.map(admin => admin.email).join(',');
 
             let transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -89,7 +89,6 @@ const mail = async (req, res, next) => {
                 </html>`
             };
 
-            // Send the email and wait for it to complete
             await transporter.sendMail(mailOptions);
 
             res.status(200).json({ message: "Emergency email sent successfully." });
