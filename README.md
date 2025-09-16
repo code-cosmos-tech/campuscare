@@ -1,58 +1,70 @@
-# Campus Care - Backend API
+# Campus Care: A Full-Stack MERN Application
 
-Welcome to the backend server for **Campus Care**, a web application designed to help students connect with campus services like counseling, academic advising, and health check-ups. This server manages user authentication, appointment scheduling, and emergency notifications.
+Welcome to **Campus Care**, a web application designed to help students connect with campus services like counseling, academic advising, and health check-ups. This project is a complete MERN (MongoDB, Express.js, React, Node.js) stack application that manages user authentication, appointment scheduling, and emergency notifications through a secure and modern user interface.
 
-This README provides instructions for setting up, running, and interacting with the API.
+This document provides all the necessary instructions to set up, run, and understand the entire project, including both the backend API and the frontend client.
 
 ---
 
 ## Features ✨
 
-* **User Authentication**: Secure user registration and login system using JSON Web Tokens (JWT).
-* **User Management**: Users can view, update, and delete their profiles.
-* **Appointment Scheduling**: Students can book, view, update, and cancel appointments with various campus professionals.
-* **Admin Functionality**: Admins can view all appointments and receive emergency notifications.
-* **Emergency Email System**: A dedicated endpoint for users to send an emergency alert email to all registered administrators.
+* **Modern User Interface**: Clean, responsive design built with React and styled with CSS.
+* **Animated & Interactive**: Smooth page transitions and interactions powered by Framer Motion.
+* **Secure User Authentication**: Full registration and login system using JSON Web Tokens (JWT).
+* **Complete User Management**: Users can view, update, and delete their profiles.
+* **Comprehensive Appointment System**:
+    * Students can book new appointments through a multi-step form.
+    * Users can view their personal upcoming and past appointments.
+    * **(Admin)** Admins have access to a dashboard to view all appointments booked across the platform.
+* **Centralized State Management**: Global state for user data and authentication is managed via React Context.
+* **Support & Resources**: Dedicated pages for immediate support hotlines and a toolkit of wellness articles and videos.
+* **Emergency Email System**: A dedicated feature for users to send an emergency alert email directly to all registered administrators.
+* **Notifications**: User-friendly feedback and alerts using `react-toastify`.
 
 ---
 
 ## Technologies Used 💻
 
-* **Backend**: Node.js, Express.js
+### Backend
+
+* **Runtime**: Node.js
+* **Framework**: Express.js
 * **Database**: MongoDB with Mongoose ODM
 * **Authentication**: JSON Web Tokens (JWT)
-* **Email Notifications**: Nodemailer
-* **Environment Variables**: Dotenv
-* **CORS**: `cors` package for handling cross-origin requests.
+* **Email**: Nodemailer
+* **CORS**: `cors` package
+
+### Frontend
+
+* **Framework**: React (with Vite)
+* **Routing**: React Router
+* **State Management**: React Context API
+* **Animations**: Framer Motion
+* **HTTP Client**: Native `fetch` API
+* **Notifications**: React Toastify
+* **Icons**: React Icons
 
 ---
 
 ## Getting Started
 
-Follow these instructions to get a local copy of the project up and running for development and testing purposes.
+To get the full application running locally, you need to set up both the backend server and the frontend client.
 
-### Prerequisites
+### **Part 1: Backend Setup**
 
-* Node.js (v18.x or later)
-* npm (or yarn)
-* MongoDB (A local instance or a cloud-hosted database like MongoDB Atlas)
-
-### Installation & Setup
-
-1.  **Clone the repository:**
+1.  **Clone the backend repository:**
     ```sh
-    git clone <your-repository-url>
-    cd <repository-name>
+    git clone <your-backend-repository-url>
+    cd <backend-repository-name>
     ```
 
-2.  **Install dependencies:**
+2.  **Install backend dependencies:**
     ```sh
     npm install
     ```
 
-3.  **Set up Environment Variables:**
-    Create a `.env` file in the root of your project and add the following variables.
-
+3.  **Set up Backend Environment Variables:**
+    Create a `.env` file in the root of the **backend** project and add the following:
     ```env
     # Your MongoDB connection string
     MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<database>
@@ -63,21 +75,47 @@ Follow these instructions to get a local copy of the project up and running for 
     # Your Gmail account for sending emergency emails
     EMAIL=youremail@gmail.com
 
-    # Your Gmail App Password (recommended over your actual password)
+    # Your Gmail App Password
     EMAIL_PASS=yourgmailapppassword
     ```
 
-4.  **Run the server:**
+4.  **Run the backend server:**
     ```sh
     npm start
     ```
-    The server should now be running on `http://localhost:8080`.
+    The server should now be running on `http://localhost:8080`. Keep this terminal open.
+
+### **Part 2: Frontend Setup**
+
+1.  **Clone the frontend repository in a new terminal:**
+    ```sh
+    git clone <your-frontend-repository-url>
+    cd <frontend-repository-name>
+    ```
+
+2.  **Install frontend dependencies:**
+    ```sh
+    npm install
+    ```
+
+3.  **Configure API URL:**
+    The API URL in the frontend is configured in `src/store/Auth.jsx`. Ensure it points to your running backend server. The default is already correct if your backend is running on port 8080.
+    ```javascript
+    // src/store/Auth.jsx
+    const URL = "http://localhost:8080";
+    ```
+
+4.  **Run the frontend development server:**
+    ```sh
+    npm run dev
+    ```
+    The React application should now be running on `http://localhost:5173` and connected to your local backend.
 
 ---
 
 ## API Endpoints 🚀
 
-All endpoints are prefixed with `/api`. Authorization requires a Bearer Token in the `Authorization` header.
+The backend provides the following endpoints, all prefixed with `/api`. Authorization requires a Bearer Token.
 
 ### Authentication
 
@@ -85,8 +123,6 @@ All endpoints are prefixed with `/api`. Authorization requires a Bearer Token in
 | :----- | :---------- | :-------------------------------- | :--------------------------------------------- |
 | `POST` | `/register` | Creates a new user account.       | `{ "username", "email", "phone", "password" }` |
 | `POST` | `/login`    | Logs in a user and returns a JWT. | `{ "email", "password" }`                      |
-
----
 
 ### User Management
 
@@ -97,8 +133,6 @@ All endpoints are prefixed with `/api`. Authorization requires a Bearer Token in
 | `GET`    | `/user`  | Gets the logged-in user's data.      | (None)                                         |
 | `PATCH`  | `/user`  | Updates the logged-in user's data.   | `{ "username", "email", "phone", "password" }` |
 | `DELETE` | `/user`  | Deletes the logged-in user's account. | `{ "email" }`                                  |
-
----
 
 ### Appointment Management
 
@@ -112,8 +146,6 @@ All endpoints are prefixed with `/api`. Authorization requires a Bearer Token in
 | `PATCH`  | `/appointment/:id`        | Updates a specific appointment by its ID.          | (Fields to update)               |
 | `DELETE` | `/appointment/delete/:id` | Deletes a specific appointment by its ID.          | (None)                           |
 
----
-
 ### Emergency Contact
 
 *Authentication Required: Yes*
@@ -121,3 +153,25 @@ All endpoints are prefixed with `/api`. Authorization requires a Bearer Token in
 | Method | Endpoint             | Description                             | Request Body                       |
 | :----- | :------------------- | :-------------------------------------- | :--------------------------------- |
 | `POST` | `/emergency/contact` | Sends an emergency email to all admins. | `{ "useremail", "phone", "text" }` |
+
+---
+
+## Frontend Project Structure
+
+The frontend follows a standard React application structure for organization.
+
+```
+src
+├── App.jsx            # Main application component with routing
+├── main.jsx           # Entry point of the application
+├── components
+│   └── layout
+│       └── Navbar.jsx # Reusable navigation bar
+├── pages
+│   ├── user           # Contains all user-facing pages
+│   │   ├── Login.jsx, Register.jsx, Home.jsx, Profile.jsx
+│   │   ├── Appointment.jsx, BookAppointments.jsx
+│   │   └── ViewAllAppointments.jsx
+└── store
+    └── Auth.jsx       # AuthContext for global state management
+```
