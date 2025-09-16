@@ -54,8 +54,8 @@ To get the full application running locally, you need to set up both the backend
 
 1.  **Clone the backend repository:**
     ```sh
-    git clone <your-backend-repository-url>
-    cd <backend-repository-name>
+    git clone https://github.com/code-cosmos-tech/campuscare.git
+    cd campuscare
     ```
 
 2.  **Install backend dependencies:**
