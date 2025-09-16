@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../store/Auth";
@@ -12,7 +12,7 @@ export function Register() {
         password: "",
     });
 
-    const { URL } = useAuth();
+    const { URL , setUserToken, isLoggedIn} = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -22,6 +22,12 @@ export function Register() {
             [name]: value,
         });        
     };
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            return navigate("/");
+        }   
+    },[]);
 
     const handleSubmit = async (e) => {
         try {
@@ -34,6 +40,8 @@ export function Register() {
             });
             const response = await res.json();
             if (res.ok) {
+                setUserToken(response.token);
+                navigate("/login");
                 toast.success(response.msg);
             } else {
                 toast.error(response.msg);

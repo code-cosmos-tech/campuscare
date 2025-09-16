@@ -1,24 +1,105 @@
-// const getResponse = async (req, res, next) => {
-//     const {input} = req.body
-//     e.preventDefault();
-//     if (input.trim() === '') return;
+const User = require("../db-models/user-model");
+const nodemailer = require("nodemailer");
 
-//     const requestBody = {
-//         "user-input": input
-//     }
+const mail = async (req, res, next) => {
+    const { useremail, phone, text } = req.body;
+    try {
+        // Find all admin users
+        const admins = await User.find({ isAdmin: true });
 
-//     const resp = await fetch(`https://codeandcosmos.app.n8n.cloud/webhook/13c2e677-4967-45fe-adcb-c2cb9b16c5ee`, {
-//         method : "POST",
-//         headers : {
-//             "Content-Type" : "Application/json"
-//         },
-//         body : JSON.stringify(requestBody)
-//     })
+        if (admins && admins.length > 0) {
+            // Extract email addresses from the admin users
+            const adminEmails = admins.map(admin => admin.email).join(','); // comma-separated list
 
-//     if(resp.ok){
-//         const data = await resp.text();
-//         return data;
-//     }
-// }
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.EMAIL_PASS
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
 
-// module.exports = {getResponse};
+            let mailOptions = {
+                from: process.env.EMAIL,
+                to: adminEmails,
+                subject: 'Emergency Alert',
+                html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8" />
+                        <style>
+                            body {
+                                font-family: 'Segoe UI', sans-serif;
+                                background-color: #121212;
+                                color: #e0e0e0;
+                                padding: 0;
+                                margin: 0;
+                            }
+                            .email-container {
+                                max-width: 600px;
+                                margin: 2rem auto;
+                                background-color: #1e1e1e;
+                                padding: 2rem;
+                                border-radius: 10px;
+                                box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+                            }
+                            .message {
+                                font-size: 1rem;
+                                margin: 1.5rem 0;
+                                line-height: 1.6;
+                                color: #cccccc;
+                            }
+                            .highlight {
+                                color: #a093ff;
+                                font-weight: 500;
+                            }
+                            .footer {
+                                font-size: 0.85rem;
+                                color: #888;
+                                text-align: center;
+                                margin-top: 2rem;
+                                border-top: 1px solid #333;
+                                padding-top: 1rem;
+                            }
+                            a {
+                                color: #a093ff;
+                                text-decoration: none;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="email-container">
+                            <div class="message">
+                                <p>A user has requested <span class="highlight">Emergency support</span> and agreed to share their information.</p><br/>
+                                <p><strong>Email:</strong> ${useremail}</p>
+                                <p><strong>Phone:</strong> ${phone}</p>
+                                <p><strong>Message:</strong> ${text}</p>
+                                <p>Please reach out immediately to provide support.</p><br/>
+                            </div>
+                            <div class="footer">
+                                This is an automated email. Please do not reply.<br/>
+                                &copy; 2025 Campus Care. All rights reserved.
+                            </div>
+                        </div>
+                    </body>
+                </html>`
+            };
+
+            // Send the email and wait for it to complete
+            await transporter.sendMail(mailOptions);
+
+            res.status(200).json({ message: "Emergency email sent successfully." });
+        } else {
+            res.status(404).json({ message: "No admin users found." });
+        }
+    } catch (error) {
+        console.error('Error sending email:', error);
+        next(error);
+    }
+}
+
+module.exports = {mail};

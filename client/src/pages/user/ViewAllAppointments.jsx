@@ -5,7 +5,7 @@ import { Navbar } from '../../components/layout/Navbar';
 import './Appointments.css';
 import { useAuth } from '../../store/Auth';
 
-export function AppointmentsPage() {
+export function AllAppointmentsPage() {
     const {userData, tokenBearer, isLoggedIn, URL} = useAuth();
     const [appointments, setAppointments] = useState([]);
     const [activeTab, setActiveTab] = useState('Upcoming');
@@ -21,51 +21,13 @@ export function AppointmentsPage() {
 
         if(resp.ok){
             const data = await resp.json();
-            setAppointments(data)
+            data.sort((a, b) => new Date(a.date) - new Date(b.date));
+            setAppointments(data);
         }
     }
-    // const mockAppointments = [
-    //     {
-    //         id: 1,
-    //         service: 'Deep Tissue Massage',
-    //         professional: 'Dr. Evelyn Reed',
-    //         date: '2025-08-20', // Past
-    //         time: '10:00 AM',
-    //     },
-    //     {
-    //         id: 2,
-    //         service: 'Annual Physical Exam',
-    //         professional: 'Dr. Ben Carter',
-    //         date: '2025-09-10', // Past
-    //         time: '2:30 PM',
-    //     },
-    //     {
-    //         id: 3,
-    //         service: 'Dental Cleaning',
-    //         professional: 'Dr. Chloe Davis',
-    //         date: '2025-09-25', // Upcoming
-    //         time: '11:00 AM',
-    //     },
-    //     {
-    //         id: 4,
-    //         service: 'Chiropractic Adjustment',
-    //         professional: 'Dr. Marcus Thorne',
-    //         date: '2025-10-05', // Upcoming
-    //         time: '4:00 PM',
-    //     },
-    //     {
-    //         id: 5,
-    //         service: 'Follow-up Consultation',
-    //         professional: 'Dr. Ben Carter',
-    //         date: '2025-10-15', // Upcoming
-    //         time: '9:15 AM',
-    //     },
-    // ];
 
     useEffect(() => {
-        appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
-        setAppointments(appointments);
-        
+        fetchAppointments();
     }, []);
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
@@ -90,7 +52,7 @@ export function AppointmentsPage() {
             <main className="appointments-main">
                 <div className="appointments-container">
                     <div className="appointments-header">
-                        <h1 className="section-heading">My Appointments</h1>
+                        <h1 className="section-heading">All Appointments</h1>
                     </div>
 
                     <div className="tabs-container">

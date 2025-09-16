@@ -22,7 +22,6 @@
     border-bottom: 1px solid #e5e7eb; /* gray-200 */
 }
 
-/* Reusing your heading styles */
 .section-heading {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -70,6 +69,7 @@
 }
 
 .appointment-card.past {
+    /* As discussed, the opacity can be removed or adjusted here */
     opacity: 0.7;
     background-color: #f9fafb; /* gray-50 */
 }
@@ -78,6 +78,7 @@
     display: flex;
     gap: 1.5rem;
     align-items: center;
+    opacity: 1;
 }
 
 .card-date {
@@ -112,7 +113,6 @@
     justify-content: flex-end;
 }
 
-
 /* Booking Form */
 .booking-form-container {
     background-color: white;
@@ -125,35 +125,13 @@
 .form-select { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; }
 .form-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 2rem;}
 
-.time-slots {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.75rem;
-}
-.time-slot-btn {
-    padding: 0.75rem;
-    border: 2px solid #d1d5db;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    background-color: white;
-    text-align: center;
-    font-weight: 600;
-}
-.time-slot-btn.selected {
-    border-color: var(--primary-color);
-    background-color: #eef2ff; /* indigo-100 */
-    color: var(--primary-color);
-}
-
 .no-appointments { text-align: center; padding: 4rem 2rem; background-color: white; border-radius: 0.75rem; border: 2px dashed #d1d5db; }
 .no-appointments p { color: var(--light-subtext); margin-bottom: 1.5rem; }
 
-/* Re-using button styles from Journal.css */
+/* Re-using button styles */
 .btn { font-weight: 600; padding: 0.75rem 2rem; border-radius: 0.5rem; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
 .btn-primary { background-color: var(--primary-color); color: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
 .btn-primary:hover { background-color: var(--primary-hover-color); }
-.btn-secondary { background-color: #e5e7eb; color: #374151; }
-.btn-secondary:hover { background-color: #d1d5db; }
 .btn-danger { background-color: #ef4444; color: white; }
 .btn-danger:hover { background-color: #dc2626; }
 
@@ -168,8 +146,5 @@
     .card-date { background-color: #312e81; color: #a5b4fc; }
     .card-details p { color: var(--dark-subtext); }
     .card-actions { border-color: #374151; }
-    .form-select, .time-slot-btn { background-color: var(--dark-bg); color: var(--dark-text); border-color: #4b5563; }
-    .time-slot-btn.selected { border-color: #60a5fa; background-color: #3730a3; color: #a5b4fc; }
-    .btn-secondary { background-color: #4b5563; color: var(--dark-text); }
-    .btn-secondary:hover { background-color: #374151; }
+    .form-select { background-color: var(--dark-bg); color: var(--dark-text); border-color: #4b5563; }
 }

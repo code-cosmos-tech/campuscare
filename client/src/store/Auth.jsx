@@ -6,10 +6,10 @@ export const AuthProvider = ({ children }) => { // Added children prop
     const [token, setToken] = useState(localStorage.getItem("accessToken") || "");
     const [isAdmin, setIsAdmin] = useState(false); 
     const [userData, setUserData] = useState({ 
-        "username": "",
-        "email": "",
-        "phone": "",
-        "password": ""
+        username: "",
+        email: "",
+        phone: "",
+        password: ""
     });
 
     const tokenBearer = "Bearer " + token;

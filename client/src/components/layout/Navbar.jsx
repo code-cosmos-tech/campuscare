@@ -8,7 +8,7 @@ export function Navbar() {
     // (The JSX and logic you provided are perfect)
     const [show, setShow] = useState(false);
     const [hasInteracted, setHasInteracted] = useState(false);
-    const { isLoggedIn, logout, userData } = useAuth();
+    const { isLoggedIn, logout, userData, isAdmin} = useAuth();
  
     const handleShow = (e) => {
         if (!hasInteracted)
@@ -31,7 +31,7 @@ export function Navbar() {
             <div className="links">
                 <span><NavLink className="nav-link" to={'/'}>Home</NavLink></span>
                 <span><NavLink className="nav-link" to={'/resources'}>Resources</NavLink></span>
-                {/* <span><NavLink className="nav-link" to={'/support'}>Support</NavLink></span> */}
+                <span><NavLink className="nav-link" to={'/support'}>Support</NavLink></span>
                 <span><NavLink className="nav-link" to={'/community'}>Community</NavLink></span>
                 {/* <span><NavLink className="nav-link" to={'/professionals'}>Professionals</NavLink></span> */}
                 {
@@ -43,7 +43,11 @@ export function Navbar() {
                     <>
                         <span><NavLink to={'/user/profile'} className="nav-link"><i className="fa-regular fa-user"></i> Profile</NavLink></span>
                         <span><NavLink to={'/user/appointments'} className="nav-link"><i className="fa-regular fa-calendar-check"></i> Appointments</NavLink></span>
-                        {/* <span><NavLink to={'/user/journal'} className="nav-link"><i className="fa-regular fa-book"></i> Journal</NavLink></span> */}
+                        {
+                            isAdmin && (
+                                <span><NavLink to={'/user/allAppointments'} className="nav-link"><i className="fa-regular fa-book"></i> All Appointments</NavLink></span>
+                            )
+                        }
                         <span><NavLink to={'/'} onClick={logout} className="nav-link logout-btn">Logout</NavLink></span>
                     </>
                 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom"; // Combined imports
 import { toast } from "react-toastify";
 import { useAuth } from "../../store/Auth";
@@ -10,7 +10,7 @@ export function Login() {
         password: "",
     });
 
-    const { setUserToken, URL } = useAuth();
+    const { setUserToken, URL, isLoggedIn} = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -50,6 +50,12 @@ export function Login() {
             toast.error("An unexpected error occurred.");
         }
     };
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/");
+        }   
+    },[]);
 
     return (
         <section className="login-section">

@@ -48,7 +48,7 @@ export function Home() {
                                 </button>
                                 <button 
                                     className="btn btn-secondary"
-                                    onClick={() => navigate('/support')}
+                                    onClick={() => navigate('/chatbot')}
                                 >
                                     Get Immediate Support
                                 </button>

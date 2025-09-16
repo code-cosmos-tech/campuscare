@@ -105,8 +105,8 @@ export function Profile() {
                         <div className="profile-avatar-wrapper">
                 
                         </div>
-                        <h2 className="profile-username">{userData.username}</h2>
-                        <p className="profile-email">{userData.email} | {userData.phone}</p>
+                        <h2 className="profile-username">{formData.username}</h2>
+                        <p className="profile-email">{formData.email} | {formData.phone}</p>
                     </div>
 
                     {!isEditMode ? (

@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const connectDb = require("./utilities/db");
 const authRouter = require("./routes/auth");
+// const appointmentRouter = require("./routes/appointment");
 const userRouter = require("./routes/user");
 // const chatRouter = require("./routes/chat")
 const errorFunction = require("./middlewares/error-func");
